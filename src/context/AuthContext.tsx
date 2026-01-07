@@ -43,22 +43,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [access_token, set_access_token] = useState<string | null>(null);
 
   const isAuthenticated = !!user && !!getAccessToken();
 
   useEffect(() => {
+  const token = getAccessToken();
+
+  if (token) {
+    set_access_token(token);
+
     const init = async () => {
       try {
         const { data } = await axiosInstances.get("/auth/me");
         setUser(data);
-      } catch {
+      } catch (error) {
         clearTokens();
       } finally {
         setLoading(false);
       }
     };
+
     init();
-  }, []);
+  } else {
+    clearTokens();
+    setLoading(false);
+  }
+}, []); // ✅ runs only once on app start
+
 
   const login = async (email: string, password: string) => {
     const form = new URLSearchParams();
