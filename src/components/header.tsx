@@ -517,7 +517,7 @@ export default function Header() {
       >
         <Toolbar className="py-2">
           <div
-            onClick={() => navigate("/")}
+            onClick={() => isAuthenticated ? navigate("/copilot") : navigate("/auth/login")}
             className="flex-grow flex items-center gap-2 cursor-pointer group"
           >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform">
