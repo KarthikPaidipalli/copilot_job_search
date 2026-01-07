@@ -527,7 +527,7 @@ export default function Header() {
               variant="h6"
               className="font-bold text-gray-800 hidden sm:block"
             >
-              jobcopilot
+              Job Scout
             </Typography>
           </div>
 
